@@ -1,0 +1,54 @@
+/* * {
+    background-color: aqua;
+    font-family: serif;
+    font-family: sans-serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+h1 {
+    background-color: red;
+    color: white;
+}
+
+h1 {
+    background-color: green;
+    color: white;
+} */
+
+
+/* div>p {
+    background-color: plum;
+    color: black;
+} */
+
+
+/* 
+div span {
+    background-color: plum;
+    color: black;
+} */
+
+
+/* h1+p {
+    background-color: yellow;
+    color: black;
+} */
+
+
+/* h1~p {
+    background-color: #9dc57b;
+    color: black;
+    opacity: 0.5;
+} */
+
+.first {
+    font-weight: 400;
+    font-style: italic;
+}
+
+.second {
+    font-weight: 400;
+    font-style: oblique;
+    font-size: 40px;
+    text-align: center;
+}
