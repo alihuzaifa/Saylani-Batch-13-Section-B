@@ -1,0 +1,66 @@
+/* @font-face {
+    font-family: my-font;
+    src: url("fonts/Poppins-SemiBoldItalic.ttf");
+}
+
+h1 {
+    font-family: my-font;
+}
+
+p {
+    x y wide color
+    text-shadow: 10px 10px 1px #3d3d3d;
+}
+
+
+
+
+
+p::first-letter {
+    color: red;
+}
+
+p::first-line {
+    color: blueviolet;
+}
+
+p::first-line {
+    color: rgb(8, 41, 2);
+}
+
+
+a:link {
+    color: red;
+}
+
+a:visited {
+    color: green;
+}
+
+a:hover {
+    color: darkmagenta;
+
+    font-size: 30px;
+}
+
+a:active{
+    color: cyan;
+}
+input:focus{
+    border: 4px solid red;
+} */
+
+
+p {
+    background-color: aqua;
+    /* max-width: 450px; */
+    /* max-height: 100px; */
+
+
+
+
+    width: 10px;
+    min-width: 200px;
+    min-height: 180px;
+    height: 50px;
+}

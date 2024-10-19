@@ -1,0 +1,81 @@
+/* h1 {
+    background-color: hsla(360, 100%, 0%, .3);
+    color: white;
+}
+
+p {
+    font-weight: 400;
+    font-style: italic;
+
+}
+
+strong {
+    font-weight: 400;
+}
+
+i {
+    font-style: normal;
+} */
+
+/* p {
+    background-color: red;
+    text-align: right;
+    text-align: left;
+    text-align: justify;
+
+    text-transform: capitalize;
+    text-transform: lowercase;
+
+    text-decoration: none;
+
+} */
+
+
+/* 20px === 100% 200% */
+
+/* body {
+    font-size: 100px;
+}
+
+
+p {
+    font-size: 30px;
+    font-size: 200%;
+} */
+
+
+
+
+
+
+/* Depart 1 */
+/* .depart-1 {
+    font-size: 40px;
+}
+
+.depart-1>p {
+    font-size: 1em;
+}
+
+.depart-2 {
+    font-size: 20px;
+}
+
+.depart-2>p {
+    font-size: 1em;
+} */
+
+
+
+
+
+
+
+
+:root {
+    font-size: 20px;
+}
+
+p {
+    font-size: 1rem;
+}
