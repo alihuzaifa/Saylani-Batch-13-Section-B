@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* h1 {
+    position: relative;
+    top: 30px;
+} */
+
+
+/* div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-color: aqua;
+    color: #fff;
+    border: 1px solid black;
+}
+
+p {
+    position: absolute;
+    top: 0px;
+} */
+
+
+/* h1 {
+    background-color: red;
+    color: white;
+    margin-top: 100px;
+    position: sticky;
+    top: 100px;
+} */
+
+
+/* span {
+    width: 30px;
+    height: 30px;
+    display: block;
+    border-radius: 50%;
+    background-color: red;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+} */
+
+/* .container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+
+.box1 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50px;
+    left: 50px;
+    background-color: red;
+    z-index: 2;
+}
+
+.box2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 80px;
+    left: 80px;
+    background-color: yellow !important;
+    z-index: 3;
+}
+
+.box2 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 80px;
+    left: 80px;
+    background-color: rgb(101, 245, 4);
+    z-index: 3;
+}
+
+.box3 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 110px;
+    left: 110px;
+    background-color: rgb(60, 0, 255);
+    z-index: 3;
+} */
+
+
+
+/* :root {
+    --red-color: red;
+    --blue-color: blue;
+}
+
+body{
+    background-color: var(--blue-color);
+    color: var(--red-color);
+} */
