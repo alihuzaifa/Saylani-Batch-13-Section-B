@@ -1,0 +1,76 @@
+/* max      high to low  */
+/* min      low to high */
+
+/* 1400 1200 992 768 576  */
+
+/* @media only screen and (max-width: 1400px) {
+    body {
+        background-color: yellow;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    body {
+        background-color: green;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    body {
+        background-color: pink;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        background-color: blue;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    body {
+        background-color: orange;
+    }
+} */
+
+/* body{
+    background-color: black;
+}
+@media only screen and (min-width: 576px) {
+    body {
+        background-color: yellow;
+    }
+}
+@media only screen and (min-width: 768px) {
+    body {
+        background-color: green;
+    }
+}
+@media only screen and (min-width: 992px) {
+    body {
+        background-color: aqua;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    body {
+        background-color: gray;
+    }
+}
+@media only screen and (min-width: 1400px) {
+    body {
+        background-color: chocolate;
+    }
+} */
+
+
+.main-box {
+    background-color: red;
+    height: 200vh;
+}
+.custom-column {
+    background-color: white;
+    border-radius: 10px;
+    height: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,88 @@
+Bootstrap 5 provides a wide array of utility classes that help you quickly style your layouts and components. Here’s a summary of some of the most important classes:
+
+### Layout Classes
+
+- **Container Classes**
+  - `.container`: Fixed-width container.
+  - `.container-fluid`: Full-width container.
+  - `.container-{breakpoint}`: Responsive fixed-width container (e.g., `.container-sm`, `.container-md`).
+
+- **Grid System**
+  - `.row`: Creates a horizontal group of columns.
+  - `.col`: Automatically sized column.
+  - `.col-{breakpoint}`: Responsive column sizes (e.g., `.col-sm-6`, `.col-md-4`).
+  - `.g-{size}`: Gap utility for spacing between columns (e.g., `.g-3`).
+
+### Spacing Utilities
+
+- **Margin**
+  - `.m-{size}`: Margin (e.g., `.m-3` for all sides).
+  - `.mt-{size}`, `.mr-{size}`, `.mb-{size}`, `.ml-{size}`: Margin for top, right, bottom, left respectively.
+  
+- **Padding**
+  - `.p-{size}`: Padding (e.g., `.p-3` for all sides).
+  - `.pt-{size}`, `.pr-{size}`, `.pb-{size}`, `.pl-{size}`: Padding for top, right, bottom, left respectively.
+
+### Positioning
+
+- **Position Utilities**
+  - `.position-static`: Default positioning.
+  - `.position-relative`: Relative positioning.
+  - `.position-absolute`: Absolute positioning.
+  - `.position-fixed`: Fixed positioning.
+  - `.position-sticky`: Sticky positioning.
+
+### Flexbox Utilities
+
+- **Flex Container**
+  - `.d-flex`: Applies flexbox to an element.
+  - `.flex-row`: Horizontal layout.
+  - `.flex-column`: Vertical layout.
+  
+- **Justify Content**
+  - `.justify-content-start`: Aligns items to the start.
+  - `.justify-content-center`: Centers items.
+  - `.justify-content-end`: Aligns items to the end.
+  - `.justify-content-between`: Spaces items evenly.
+  - `.justify-content-around`: Spaces items with equal space around.
+
+- **Align Items**
+  - `.align-items-start`: Aligns items to the top.
+  - `.align-items-center`: Centers items vertically.
+  - `.align-items-end`: Aligns items to the bottom.
+
+### Buttons
+
+- **Button Classes**
+  - `.btn`: Base button class.
+  - `.btn-primary`: Primary button.
+  - `.btn-secondary`: Secondary button.
+  - `.btn-success`: Success button.
+  - `.btn-danger`: Danger button.
+  - `.btn-warning`: Warning button.
+  - `.btn-info`: Info button.
+  - `.btn-light`: Light button.
+  - `.btn-dark`: Dark button.
+  - `.btn-link`: Link button.
+  
+### Card Component
+
+- **Card Classes**
+  - `.card`: Base card class.
+  - `.card-body`: Card content area.
+  - `.card-title`: Card title.
+  - `.card-text`: Card text content.
+  - `.card-img-top`, `.card-img-bottom`, `.card-img`: Image placement in card.
+
+### Other Utilities
+
+- **Text Utilities**
+  - `.text-center`: Center text.
+  - `.text-left`: Align text to the left.
+  - `.text-right`: Align text to the right.
+  - `.text-muted`: Muted text.
+  
+- **Background Utilities**
+  - `.bg-primary`, `.bg-secondary`, etc.: Background color classes.
+
+These classes form the backbone of Bootstrap 5 and can be mixed and matched to create responsive and attractive layouts with minimal custom CSS.
