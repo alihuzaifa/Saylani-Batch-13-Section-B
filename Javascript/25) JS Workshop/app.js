@@ -89,15 +89,71 @@
 // a = b;
 // b = a + b;
 
-function fibonacci(number) {
-  var a = 0;
-  var b = 1;
+// function fibonacci(number) {
+//   var a = 0;
+//   var b = 1;
 
-  for (var i = 1; i <= number; i++) {
-    console.log(a, b);
-    var next = a + b;
-    a = b;
-    b = next;
+//   for (var i = 1; i <= number; i++) {
+//     console.log(a);
+//     var next = a + b;
+//     a = b;
+//     b = next;
+//   }
+// }
+// fibonacci(10);
+
+// var numbers = [1, 2, 3, 4, 5, 21, 6, -1, -2, -66, 7, 8, 9, 10];
+// var largestNumber;
+// for (var i = 0; i < numbers.length; i++) {
+//   if (i === 0) {
+//     largestNumber = numbers[0];
+//   }
+
+//   var item = numbers[i];
+//   if (item < largestNumber) {
+//     largestNumber = item;
+//   }
+// }
+// console.log(largestNumber);
+
+// var userNumber = +prompt("Enter a number");
+// if (userNumber % 3 === 0 && userNumber % 5 === 0) {
+//   console.log("Correct");
+// } else {
+//   console.log("Wrong");
+// }
+
+var numbers = [1, 2, 2, 3, 4, 7, 8, 9, 7, 5, 3, 2, 1, 3];
+// var uniqueNumbers = [];
+
+// for (var i = 0; i < numbers.length; i++) {
+//   var parentItem = numbers[i];
+//   var isDuplicate = false;
+
+//   for (var inner = 0; inner < uniqueNumbers.length; inner++) {
+//     var innerItem = uniqueNumbers[inner];
+//     if (innerItem === parentItem) {
+//       isDuplicate = true;
+//       break;
+//     }
+//   }
+
+//   if (isDuplicate === false) {
+//     uniqueNumbers.push(parentItem);
+//   }
+// }
+
+// console.log(uniqueNumbers);
+
+// var uniqueNumbers = new Set(numbers);
+// console.log(Array.from(uniqueNumbers));
+
+var sentence = "a quick brown fox jumps over the lazy dog";
+var count = 0;
+for (var i = 0; i < sentence.length; i++) {
+  var item = sentence[i];
+  if (item === "a") {
+    count++;
   }
 }
-fibonacci(10);
+console.log(count);
