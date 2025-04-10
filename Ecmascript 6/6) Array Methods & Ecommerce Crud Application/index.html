@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      tr,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      #amount {
+        text-align: end;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Form -->
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="productName" class="form-label">Product name</label>
+        <input type="text" class="form-control" id="productName" required />
+      </div>
+      <div class="col-md-6">
+        <label for="productPrice" class="form-label">Product Price</label>
+        <input type="text" class="form-control" id="productPrice" required />
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" id="submitButton">Submit form</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <table class="table mt-5">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Product Price</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <h1 id="amount"></h1>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+  </body>
+</html>
