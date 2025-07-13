@@ -19,7 +19,8 @@ function ForgotPassword() {
         <CardHeader>
           <CardTitle>Forgot Password</CardTitle>
           <CardDescription>
-            Enter your email address and we'll send you a link to reset your password
+            Enter your email address and we'll send you a link to reset your
+            password
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -43,7 +44,7 @@ function ForgotPassword() {
           </Button>
           <p className="text-sm text-center">
             Remember your password?{" "}
-            <Link to="/login" className="underline cursor-pointer">
+            <Link to={"/login"} className="underline">
               Back to login
             </Link>
           </p>
@@ -53,4 +54,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword; 
+export default ForgotPassword;
