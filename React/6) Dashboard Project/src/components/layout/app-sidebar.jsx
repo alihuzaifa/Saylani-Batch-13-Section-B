@@ -13,8 +13,13 @@ import { Link } from "react-router-dom";
 
 const items = [
   {
-    title: "Dashboard",
-    url: "/dashboard",
+    title: "Add Student",
+    url: "/add-student",
+    icon: Home,
+  },
+  {
+    title: "Add Trainer",
+    url: "/add-trainer",
     icon: Home,
   },
 ];
