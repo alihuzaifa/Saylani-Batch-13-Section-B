@@ -11,8 +11,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
+import useAppStore from "../store";
 
 function Login() {
+  const { userId, setUserId } = useAppStore();
+  console.log(userId);
+
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-sm">
@@ -50,7 +54,12 @@ function Login() {
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button type="submit" className="w-full">
+          <Button
+            onClick={() => {
+              setUserId("12345678910");
+            }}
+            className="w-full"
+          >
             Login
           </Button>
           <p className="text-sm text-center">
