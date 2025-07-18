@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -11,11 +10,28 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
-import useAppStore from "../store";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function Login() {
-  const { userId, setUserId } = useAppStore();
-  console.log(userId);
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const loginSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const submitData = (values) => {
+    console.log("Test");
+  };
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: loginSchema,
+    onSubmit: submitData,
+  });
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -33,11 +49,17 @@ function Login() {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="m@example.com"
                   required
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
                 />
               </div>
+              {formik.errors.email && formik.touched.email && (
+                <span>{formik.errors.email}</span>
+              )}
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
@@ -48,15 +70,25 @@ function Login() {
                     Forgot your password?
                   </Link>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  type="password"
+                  required
+                />
               </div>
+              {formik.errors.password && formik.touched.password && (
+                <span>{formik.errors.password}</span>
+              )}
             </div>
           </form>
         </CardContent>
         <CardFooter className="flex-col gap-2">
           <Button
             onClick={() => {
-              setUserId("12345678910");
+              formik.submitForm();
             }}
             className="w-full"
           >
