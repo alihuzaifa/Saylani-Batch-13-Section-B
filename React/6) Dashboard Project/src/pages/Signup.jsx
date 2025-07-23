@@ -9,9 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import * as Yup from "yup";
 import { auth, db } from "../firebase";
@@ -36,6 +39,7 @@ function Signup() {
       .required("Confirm password is required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -49,13 +53,17 @@ function Signup() {
           values.password
         );
         if (createUser) {
+          await sendEmailVerification(auth.currentUser);
           await addDoc(collection(db, "users"), {
             name: values.name,
             email: values.email,
             timestamp: Date.now(),
           });
-          toast("User has been created");
+          toast(
+            "User has been created. Please Verified your Email through Spam Section in your Gmail Account"
+          );
           formik.resetForm();
+          navigate("/login");
         }
       } catch (error) {
         toast(error.message);

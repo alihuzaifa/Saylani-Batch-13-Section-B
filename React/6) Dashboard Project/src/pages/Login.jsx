@@ -9,9 +9,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { auth } from "../firebase";
+import { useState } from "react";
+import { toast } from "sonner";
+import {
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import useAppStore from "../store";
 
 function Login() {
   const initialValues = {
@@ -22,15 +30,39 @@ function Login() {
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
-
-  const submitData = (values) => {
-    console.log("Test");
-  };
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { setUserId } = useAppStore();
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: loginSchema,
-    onSubmit: submitData,
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        const checkUser = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        if (checkUser) {
+          // const { user: { emailVerified } } = checkUser;
+          if (checkUser?.user?.emailVerified) {
+            toast("Login Successfully");
+            setUserId(checkUser?.user?.uid);
+            navigate("/add-student");
+          } else {
+            await sendEmailVerification(auth.currentUser);
+            toast("Please verified your email to proceed further");
+          }
+        } else {
+          toast("Please create an account to proceed");
+        }
+      } catch (error) {
+        toast(error.message);
+      } finally {
+        setLoading(false);
+      }
+    },
   });
 
   return (
@@ -58,7 +90,9 @@ function Login() {
                 />
               </div>
               {formik.errors.email && formik.touched.email && (
-                <span>{formik.errors.email}</span>
+                <span className="text-red-500 text-[12px]">
+                  {formik.errors.email}
+                </span>
               )}
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -80,7 +114,9 @@ function Login() {
                 />
               </div>
               {formik.errors.password && formik.touched.password && (
-                <span>{formik.errors.password}</span>
+                <span className="text-red-500 text-[12px]">
+                  {formik.errors.password}
+                </span>
               )}
             </div>
           </form>
@@ -90,9 +126,10 @@ function Login() {
             onClick={() => {
               formik.submitForm();
             }}
+            disabled={loading}
             className="w-full"
           >
-            Login
+            {loading ? "Logging..." : "Log In"}
           </Button>
           <p className="text-sm text-center">
             Don't have an account?{" "}

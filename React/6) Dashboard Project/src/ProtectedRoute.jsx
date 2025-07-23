@@ -3,7 +3,7 @@ import useAppStore from "./store";
 
 const ProtectedRoute = ({ children }) => {
   const { userId } = useAppStore();
-  if (!userId) {
+  if (!userId) { 
     return <Navigate to="/login" replace />;
   }
   return children;
