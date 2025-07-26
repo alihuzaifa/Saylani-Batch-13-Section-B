@@ -6,9 +6,49 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { useEffect, useState } from "react";
+import { Trash } from "lucide-react";
+import { toast } from "sonner";
 
-function TrainerList() {
-  const data = [];
+function StudentList() {
+  const [trainer, setTrainer] = useState([]);
+
+  const init = async () => {
+    const collectionRef = collection(db, "add-trainer");
+    const q = query(collectionRef);
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        const combinedDataWithId = { ...doc.data(), id: doc?.id };
+        data.push(combinedDataWithId);
+      });
+      setTrainer(data);
+    });
+    return unsubscribe;
+  };
+
+  const deleteStudent = async (id) => {
+    try {
+      const documentRef = doc(db, "add-trainer", id);
+      await deleteDoc(documentRef);
+      toast("Record has been deleted");
+    } catch (error) {
+      toast(error?.message);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
     <Table>
       <TableHeader>
@@ -21,14 +61,21 @@ function TrainerList() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((invoice) => {
+        {trainer.map((student) => {
           return (
-            <TableRow key={invoice.id}>
-              <TableCell className="font-medium">{invoice.id}</TableCell>
-              <TableCell>{invoice.name}</TableCell>
-              <TableCell>{invoice.email}</TableCell>
-              <TableCell>{invoice.phone}</TableCell>
-              <TableCell></TableCell>
+            <TableRow key={student.id}>
+              <TableCell className="font-medium">{student.id}</TableCell>
+              <TableCell>{student.name}</TableCell>
+              <TableCell>{student.email}</TableCell>
+              <TableCell>{student.phone}</TableCell>
+              <TableCell>
+                <Trash
+                  size={16}
+                  onClick={() => {
+                    deleteStudent(student?.id);
+                  }}
+                />
+              </TableCell>
             </TableRow>
           );
         })}
@@ -36,4 +83,4 @@ function TrainerList() {
     </Table>
   );
 }
-export default TrainerList;
+export default StudentList;
