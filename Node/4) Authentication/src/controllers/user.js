@@ -1,7 +1,12 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const secret = "13253mjbnmbcvbnvcxur76547e3";
+import User from "../models/user.js";
 const users = [];
+// mongodb+srv://alihuzaifa:alihuzaifa@cluster0.vs8rrks.mongodb.net/
+
+// ODM  ===> Object Data Modelling
+// ORM  ===> Object Relational Maping
 
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -19,7 +24,6 @@ const createUser = async (req, res) => {
     email,
     password: hashedPassword,
     id: Date.now(),
-    token: "",
   };
   users.push(userObj);
   return res.send({
