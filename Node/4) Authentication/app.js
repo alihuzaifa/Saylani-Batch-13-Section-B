@@ -8,10 +8,13 @@
 
 import express from "express";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import todoRoutes from "./src/routes/todo.js";
 import userRoutes from "./src/routes/user.js";
-import mongoose from "mongoose";
+import dbConnection from "./src/lib/db.js";
 const app = express();
+
+dotenv.config({});
 
 // Middleware
 app.use(bodyParser.json());
@@ -20,10 +23,7 @@ app.use(bodyParser.json());
 app.use("/api", todoRoutes);
 app.use("/api/user", userRoutes);
 
-mongoose
-  .connect("mongodb+srv://alihuzaifa:alihuzaifa@cluster0.vs8rrks.mongodb.net/")
-  .then(() => console.log("Connected!"))
-  .catch((error) => console.error("error", error));
-
-app.listen(3000);
-console.log("Server Started");
+dbConnection().then(() => {
+  console.log("Server Started");
+  app.listen(3000);
+});

@@ -2,16 +2,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const secret = "13253mjbnmbcvbnvcxur76547e3";
 import User from "../models/user.js";
-const users = [];
-// mongodb+srv://alihuzaifa:alihuzaifa@cluster0.vs8rrks.mongodb.net/
-
 // ODM  ===> Object Data Modelling
 // ORM  ===> Object Relational Maping
 
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
-
-  const isUserExist = users.find((obj) => obj.email === email);
+  const isUserExist = await User.findOne({ email: email });
   if (isUserExist) {
     return res.send({
       message: `User already exists against this ${email}`,
@@ -23,9 +19,8 @@ const createUser = async (req, res) => {
     name,
     email,
     password: hashedPassword,
-    id: Date.now(),
   };
-  users.push(userObj);
+  await User.create(userObj);
   return res.send({
     message: `User created successfully`,
     user: userObj,
@@ -34,7 +29,7 @@ const createUser = async (req, res) => {
 
 const signinUser = async (req, res) => {
   const { email, password } = req.body;
-  const userobj = users.find((obj) => obj.email === email);
+  const userobj = await User.findOne({ email });
   if (!userobj) {
     return res.send({
       message: `User Not Found`,
@@ -60,9 +55,10 @@ const signinUser = async (req, res) => {
   });
 };
 
-const getAllUsers = (_, res) => {
+const getAllUsers = async (_, res) => {
+  const allUsers = await User.find({});
   return res.send({
-    users,
+    allUsers,
   });
 };
 
