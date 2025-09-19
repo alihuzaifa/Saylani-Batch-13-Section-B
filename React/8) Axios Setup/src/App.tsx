@@ -1,41 +1,70 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import { apiRequest } from "./services/api";
-import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  const [todo, setTodo] = useState("");
+  const [allData, setAllData] = useState([]);
 
-  const init = async () => {
-    const request = await apiRequest("GET", "user/allUsers");
+  const getTodos = async () => {
+    const response = await apiRequest("GET", "todo");
+    setAllData(response?.data?.todos);
   };
-  useEffect(() => {});
+
+  const addTodo = async () => {
+    if (todo?.trim() === "") {
+      alert("Please fill the form");
+    }
+    try {
+      await apiRequest("POST", "create", {
+        name: todo,
+        age: 10,
+      });
+      getTodos();
+      setTodo("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteTodo = async (id: string) => {
+    await apiRequest("DELETE", `todo?id=${id}`);
+    getTodos();
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>Todo Application</h1>
+      <input
+        type="text"
+        name="todo"
+        placeholder="Enter Your Name"
+        value={todo}
+        onChange={(e) => setTodo(e?.target?.value)}
+      />
+      <button onClick={addTodo}>Add Todo</button>
+
+      <ul>
+        {allData?.map((obj: { name: string; _id: string }, index) => {
+          return (
+            <li key={index}>
+              <h4>{obj?.name}</h4>
+              <button
+                onClick={() => {
+                  deleteTodo(obj?._id);
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
-}
+};
 
 export default App;
