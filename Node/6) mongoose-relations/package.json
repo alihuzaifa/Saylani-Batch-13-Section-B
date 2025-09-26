@@ -1,0 +1,29 @@
+{
+   "name": "mongoose-relations",
+   "version": "1.0.0",
+   "description": "",
+   "main": "app.js",
+   "scripts": {
+      "start": "set NODE_ENV=PRODUCTION & node app.js",
+      "dev": "nodemon app.js",
+      "lint": "eslint . ",
+      "lint:fix": "eslint . --fix"
+   },
+   "keywords": [],
+   "author": "",
+   "type": "module",
+   "license": "ISC",
+   "dependencies": {
+      "express": "5.1.0",
+      "helmet": "8.1.0",
+      "cors": "2.8.5",
+      "dotenv": "17.2.2",
+      "mongoose": "8.18.1"
+   },
+   "devDependencies": {
+      "nodemon": "3.1.10",
+      "eslint": "9.36.0",
+      "@eslint/js": "9.36.0",
+      "globals": "16.4.0"
+   }
+}
