@@ -5,8 +5,10 @@ import cors from 'cors'
 import { errorMiddleware } from "./middlewares/error.js"
 import dotenv from "dotenv"
 import { connectDB } from "./lib/db.js"
-import upload from "./middlewares/upload.js"
 import { v2 as cloudinary } from 'cloudinary'
+import userRoute from './routes/user.js'
+import productRoute from './routes/product.js'
+import orderRoute from './routes/order.js'
 
 cloudinary.config({
   cloud_name: 'dtwwqrywm',
@@ -40,6 +42,10 @@ app.use(cors({ origin: ' * ', credentials: true }));
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
+
+app.use("/api/user", userRoute);
+app.use("/api/product", productRoute);
+app.use("/api/order", orderRoute);
 
 // your routes here
 
