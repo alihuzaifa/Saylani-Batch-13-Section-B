@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { apiRequest } from "../api";
 
-const ProductForm = ({ isOpen, onClose, product, onSubmit }) => {
+const ProductForm = ({ isOpen, onClose, product }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validationSchema = Yup.object({
@@ -22,9 +23,8 @@ const ProductForm = ({ isOpen, onClose, product, onSubmit }) => {
       .min(10, "Description must be at least 10 characters")
       .max(500, "Description must be less than 500 characters")
       .required("Description is required"),
-    image: Yup.string()
-      .url("Please enter a valid URL")
-      .required("Image URL is required")
+    // image: Yup.string()
+    //   .required("Image URL is required")
   });
 
   const formik = useFormik({
@@ -32,19 +32,29 @@ const ProductForm = ({ isOpen, onClose, product, onSubmit }) => {
       name: "",
       price: "",
       description: "",
-      image: ""
+      image: null
     },
     validationSchema,
     onSubmit: async (values) => {
       setIsSubmitting(true);
       try {
-        await onSubmit({
-          name: values.name.trim(),
-          price: parseFloat(values.price),
-          description: values.description.trim(),
-          image: values.image.trim()
-        });
-        formik.resetForm();
+        // const formData = new FormData();
+        // formData.append('name', values?.name)
+        // formData.append('price', values?.price)
+        // formData.append('description', values?.description)
+        // formData.append('image', values?.image)
+        // const response = await apiRequest('POST', 'product/create', formData);
+        const data = {
+          name: values.name,
+          price: values?.price,
+          description: values?.description
+        }
+        if (product) {
+          await apiRequest('PUT', 'product/create', data);
+        } else {
+          await apiRequest('POST', 'product/create', data);
+        }
+        formik.resetForm()
         onClose();
         toast.success(product ? "Product updated successfully!" : "Product added successfully!");
       } catch {
@@ -57,16 +67,11 @@ const ProductForm = ({ isOpen, onClose, product, onSubmit }) => {
 
   useEffect(() => {
     if (product) {
-      formik.setValues({
-        name: product.name || "",
-        price: product.price || "",
-        description: product.description || "",
-        image: product.image || ""
-      });
-    } else {
-      formik.resetForm();
+      formik.setFieldValue('name', product?.name)
+      formik.setFieldValue('price', product?.price)
+      formik.setFieldValue('description', product?.description)
     }
-  }, [product, isOpen, formik]);
+  }, [product])
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -123,9 +128,8 @@ const ProductForm = ({ isOpen, onClose, product, onSubmit }) => {
               value={formik.values.description}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className={`flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
-                formik.touched.description && formik.errors.description ? "border-red-500" : ""
-              }`}
+              className={`flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${formik.touched.description && formik.errors.description ? "border-red-500" : ""
+                }`}
             />
             {formik.touched.description && formik.errors.description && (
               <p className="text-sm text-red-500">{formik.errors.description}</p>
@@ -133,20 +137,20 @@ const ProductForm = ({ isOpen, onClose, product, onSubmit }) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="image">Image URL</Label>
+            <Label htmlFor="image">Image</Label>
             <Input
               id="image"
               name="image"
-              type="url"
-              placeholder="Enter image URL"
-              value={formik.values.image}
-              onChange={formik.handleChange}
+              type="file"
+              onChange={(event) => {
+                formik.setFieldValue("image", event.target.files[0]);
+              }}
               onBlur={formik.handleBlur}
               className={formik.touched.image && formik.errors.image ? "border-red-500" : ""}
             />
-            {formik.touched.image && formik.errors.image && (
+            {/* {formik.touched.image && formik.errors.image && (
               <p className="text-sm text-red-500">{formik.errors.image}</p>
-            )}
+            )} */}
           </div>
 
           <div className="flex justify-end space-x-2 pt-4">

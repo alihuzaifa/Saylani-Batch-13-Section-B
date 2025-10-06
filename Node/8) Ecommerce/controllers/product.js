@@ -4,21 +4,20 @@ import ProductModel from '../models/product.js';
 const createProduct = async (req, res) => {
   try {
     const { name, price, description } = req.body;
-    let imagePath = req.file?.path;
-    let url;
-    let imageId;
-    if (imagePath) {
-      const imageUpload = await cloudinary.uploader.upload(imagePath);
-      url = imageUpload?.secure_url
-      imageId = imageUpload?.public_id
-    }
-
+    // let imagePath = req?.file?.path;
+    // let url;
+    // let imageId;
+    // if (imagePath) {
+    //   const imageUpload = await cloudinary.uploader.upload(imagePath);
+    //   url = imageUpload?.secure_url
+    //   imageId = imageUpload?.public_id
+    // }
     const product = new ProductModel({
       name,
       price,
       description,
-      imageId,
-      image: url
+      // imageId,
+      // image: url
     })
     await product.validate();
     const response = await product.save();
@@ -58,7 +57,9 @@ const deleteProduct = async (req, res) => {
         message: 'Invalid Product Id',
       });
     }
-    await cloudinary.uploader.destroy(findProduct.imageId)
+    if (findProduct?.imageId) {
+      await cloudinary.uploader.destroy(findProduct.imageId)
+    }
     await ProductModel.findByIdAndDelete(id);
     return res.send({
       message: 'Product Deleted Successfully',

@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import * as Yup from "yup";
 import { useState } from "react";
+import { apiRequest } from "../api";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
@@ -41,7 +42,17 @@ function Signup() {
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        
+        const data = {
+          email: values?.email,
+          password: values?.password,
+          name: values?.name
+        }
+        const response = await apiRequest('POST', 'user/signup', data);
+        if (response?.data) {
+          navigate('/login');
+          toast(response?.data.message);
+          formik.resetForm();
+        }
       } catch (error) {
         toast(error.message);
       } finally {

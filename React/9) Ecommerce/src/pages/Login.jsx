@@ -15,6 +15,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { toast } from "sonner";
 import useAppStore from '../store'
+import { apiRequest } from "../api";
 
 function Login() {
   const initialValues = {
@@ -27,15 +28,24 @@ function Login() {
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const token = useAppStore.getState().token
-  console.log('token', token);
+  const { setToken } = useAppStore()
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       setLoading(true);
       try {
-
+        const data = {
+          email: values?.email,
+          password: values?.password
+        }
+        const response = await apiRequest('POST', 'user/login', data);
+        if (response?.data) {
+          setToken(response?.data?.token)
+          formik.resetForm();
+          navigate('/dashboard');
+          toast(response?.data.message);
+        }
       } catch (error) {
         toast(error.message);
       } finally {
