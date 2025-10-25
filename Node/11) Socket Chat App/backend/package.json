@@ -1,0 +1,26 @@
+{
+  "name": "group-chat-server",
+  "version": "1.0.0",
+  "description": "Basic Express server with Socket.IO for group chat",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "chat",
+    "socket.io",
+    "express",
+    "group-chat"
+  ],
+  "author": "",
+  "license": "MIT"
+}
